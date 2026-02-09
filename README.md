@@ -14,8 +14,12 @@ This project is configured for automatic deployment via Netlify.
 
 ### Supabase Integration
 1. Go to your [Supabase Dashboard](https://supabase.com/dashboard).
-2. Navitgate to **Project Settings** > **Integrations**.
-3. Connect the **GitHub** integration to this repository.
+2. Navitgate to **Project Settings** > **Integrations** to connect this GitHub repository.
+3. **Authentication Configuration (Crucial for Magic Links):**
+   - Go to **Authentication** > **URL Configuration**.
+   - **Site URL:** Set this to your Netlify URL (e.g., `https://medcrm-portal-aijaz-final.netlify.app`).
+   - **Redirect URLs:** Add your Netlify URL with a wildcard: `https://medcrm-portal-aijaz-final.netlify.app/**`.
+   - Click **Save**.
 
 ## Local Development
 
