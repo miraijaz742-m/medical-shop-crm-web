@@ -238,7 +238,7 @@ export default memo(function Billing() {
     <div className="flex flex-col xl:flex-row gap-6 p-2 md:p-4">
       {/* Product Selection & Cart */}
       <div className="flex-1 space-y-4 min-w-0">
-        <Card className="border-none shadow-sm">
+        <Card className="border-none shadow-sm relative z-50">
           <CardHeader className="pb-4">
             <CardTitle className="text-lg font-black text-slate-800">Add Products</CardTitle>
           </CardHeader>
