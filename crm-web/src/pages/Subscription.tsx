@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/common';
-import { Check, Zap, Shield, Crown } from 'lucide-react';
+import { Button, Input } from '@/components/ui/common';
+import { Check, Zap, Shield, X, Smartphone, CreditCard, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
+import { useAuth } from '@/components/AuthContext';
+import { supabase } from '@/lib/supabase';
 
 const plans = [
     {
+        id: 'basic',
         name: 'Basic',
-        price: 'Free',
+        price: 0,
+        priceDisplay: 'Free',
         description: 'Perfect for small medical shops just starting out.',
         features: [
             'Up to 100 products',
@@ -21,8 +25,10 @@ const plans = [
         buttonVariant: 'outline'
     },
     {
+        id: 'pro',
         name: 'Pro',
-        price: '₹499',
+        price: 499,
+        priceDisplay: '₹499',
         period: '/month',
         description: 'Advanced features for growing pharmacies.',
         features: [
@@ -42,7 +48,68 @@ const plans = [
     }
 ];
 
+type PaymentStep = 'select' | 'processing' | 'success' | 'failed';
+
 export default function Subscription() {
+    const { user } = useAuth();
+    const [showPaymentModal, setShowPaymentModal] = useState(false);
+    const [selectedPlan, setSelectedPlan] = useState<typeof plans[0] | null>(null);
+    const [paymentStep, setPaymentStep] = useState<PaymentStep>('select');
+    const [phoneNumber, setPhoneNumber] = useState('');
+
+    const handleUpgrade = (plan: typeof plans[0]) => {
+        if (plan.id === 'basic') return;
+        setSelectedPlan(plan);
+        setShowPaymentModal(true);
+        setPaymentStep('select');
+    };
+
+    const handlePhonePePayment = async () => {
+        if (!phoneNumber || phoneNumber.length < 10) {
+            alert('Please enter a valid phone number');
+            return;
+        }
+
+        setPaymentStep('processing');
+
+        // Simulate PhonePe payment processing
+        // In production, this would call your backend API which then calls PhonePe
+        setTimeout(async () => {
+            try {
+                // Simulate 90% success rate for demo
+                const isSuccess = Math.random() > 0.1;
+
+                if (isSuccess) {
+                    // Update subscription in database
+                    const { error } = await supabase.from('subscriptions').upsert({
+                        user_id: user?.id,
+                        plan: selectedPlan?.id,
+                        status: 'active',
+                        started_at: new Date().toISOString(),
+                        expires_at: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+                        payment_method: 'phonepe',
+                        amount: selectedPlan?.price
+                    }, { onConflict: 'user_id' });
+
+                    if (error) console.error('Error updating subscription:', error);
+                    setPaymentStep('success');
+                } else {
+                    setPaymentStep('failed');
+                }
+            } catch (error) {
+                console.error('Payment error:', error);
+                setPaymentStep('failed');
+            }
+        }, 3000);
+    };
+
+    const closeModal = () => {
+        setShowPaymentModal(false);
+        setSelectedPlan(null);
+        setPaymentStep('select');
+        setPhoneNumber('');
+    };
+
     return (
         <div className="max-w-5xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4 mb-16">
@@ -78,7 +145,7 @@ export default function Subscription() {
 
                             <div className="mb-8">
                                 <div className="flex items-baseline">
-                                    <span className="text-5xl font-black text-slate-900">{plan.price}</span>
+                                    <span className="text-5xl font-black text-slate-900">{plan.priceDisplay}</span>
                                     {plan.period && (
                                         <span className="text-slate-500 ml-1 font-medium">{plan.period}</span>
                                     )}
@@ -89,7 +156,7 @@ export default function Subscription() {
                                 {plan.features.map((feature) => (
                                     <li key={feature} className="flex items-start gap-3 text-sm text-slate-600">
                                         <div className="mt-0.5 w-5 h-5 bg-[hsl(var(--primary))]/20 rounded-full flex items-center justify-center flex-shrink-0">
-                                            <Check className="w-3 h-3 text-[hsl(var(--primary-foreground))]" />
+                                            <Check className="w-3 h-3 text-[hsl(var(--primary))]" />
                                         </div>
                                         {feature}
                                     </li>
@@ -97,11 +164,13 @@ export default function Subscription() {
                             </ul>
 
                             <Button
+                                onClick={() => handleUpgrade(plan)}
                                 variant={plan.buttonVariant as any}
                                 className={`w-full h-12 text-lg font-bold shadow-lg transition-all ${plan.popular
                                     ? 'bg-[hsl(var(--primary))] hover:opacity-90 text-[hsl(var(--primary-foreground))] shadow-[hsl(var(--primary))]/20'
                                     : 'border-slate-200 hover:bg-slate-50'
                                     }`}
+                                disabled={plan.id === 'basic'}
                             >
                                 {plan.buttonText}
                             </Button>
@@ -109,6 +178,140 @@ export default function Subscription() {
                     </Card>
                 ))}
             </div>
+
+            {/* Payment Modal */}
+            {showPaymentModal && selectedPlan && (
+                <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+                    <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden">
+                        {/* Header */}
+                        <div className="bg-gradient-to-r from-[hsl(var(--primary))] to-purple-600 p-6 text-white relative">
+                            <button
+                                onClick={closeModal}
+                                className="absolute top-4 right-4 text-white/80 hover:text-white"
+                            >
+                                <X className="w-6 h-6" />
+                            </button>
+                            <h2 className="text-2xl font-bold">Upgrade to {selectedPlan.name}</h2>
+                            <p className="text-white/80 mt-1">Complete your payment</p>
+                        </div>
+
+                        <div className="p-6">
+                            {paymentStep === 'select' && (
+                                <>
+                                    {/* Order Summary */}
+                                    <div className="bg-slate-50 rounded-xl p-4 mb-6">
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-slate-600">{selectedPlan.name} Plan</span>
+                                            <span className="font-bold text-slate-900">{selectedPlan.priceDisplay}/month</span>
+                                        </div>
+                                        <div className="flex justify-between items-center mt-2 pt-2 border-t border-slate-200">
+                                            <span className="font-bold text-slate-900">Total</span>
+                                            <span className="text-2xl font-black text-[hsl(var(--primary))]">{selectedPlan.priceDisplay}</span>
+                                        </div>
+                                    </div>
+
+                                    {/* Phone Number Input */}
+                                    <div className="mb-6">
+                                        <label className="block text-sm font-medium text-slate-700 mb-2">
+                                            PhonePe Registered Mobile Number
+                                        </label>
+                                        <div className="relative">
+                                            <Smartphone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                                            <Input
+                                                type="tel"
+                                                placeholder="Enter 10-digit mobile number"
+                                                value={phoneNumber}
+                                                onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, '').slice(0, 10))}
+                                                className="pl-10 h-12"
+                                                maxLength={10}
+                                            />
+                                        </div>
+                                    </div>
+
+                                    {/* Payment Methods */}
+                                    <div className="space-y-3">
+                                        <Button
+                                            onClick={handlePhonePePayment}
+                                            className="w-full h-14 bg-[#5f259f] hover:bg-[#4a1d7a] text-white font-bold text-lg rounded-xl shadow-lg"
+                                        >
+                                            <img
+                                                src="https://download.logo.wine/logo/PhonePe/PhonePe-Logo.wine.png"
+                                                alt="PhonePe"
+                                                className="w-8 h-8 mr-3 object-contain bg-white rounded-lg p-1"
+                                            />
+                                            Pay with PhonePe
+                                        </Button>
+
+                                        <div className="relative">
+                                            <div className="absolute inset-0 flex items-center">
+                                                <div className="w-full border-t border-slate-200"></div>
+                                            </div>
+                                            <div className="relative flex justify-center text-sm">
+                                                <span className="px-2 bg-white text-slate-500">or pay with</span>
+                                            </div>
+                                        </div>
+
+                                        <Button
+                                            variant="outline"
+                                            className="w-full h-12 border-2 border-dashed border-slate-200 text-slate-500"
+                                            disabled
+                                        >
+                                            <CreditCard className="w-5 h-5 mr-2" />
+                                            Card Payment (Coming Soon)
+                                        </Button>
+                                    </div>
+
+                                    <p className="text-xs text-slate-400 text-center mt-4">
+                                        Secure payment powered by PhonePe. Your payment details are encrypted.
+                                    </p>
+                                </>
+                            )}
+
+                            {paymentStep === 'processing' && (
+                                <div className="text-center py-12">
+                                    <div className="w-20 h-20 bg-[#5f259f]/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                                        <Loader2 className="w-10 h-10 text-[#5f259f] animate-spin" />
+                                    </div>
+                                    <h3 className="text-xl font-bold text-slate-900 mb-2">Processing Payment</h3>
+                                    <p className="text-slate-500">Please wait while we connect with PhonePe...</p>
+                                    <p className="text-sm text-slate-400 mt-4">Do not close this window</p>
+                                </div>
+                            )}
+
+                            {paymentStep === 'success' && (
+                                <div className="text-center py-12">
+                                    <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                                        <CheckCircle className="w-10 h-10 text-emerald-600" />
+                                    </div>
+                                    <h3 className="text-xl font-bold text-slate-900 mb-2">Payment Successful!</h3>
+                                    <p className="text-slate-500 mb-6">Your {selectedPlan.name} subscription is now active.</p>
+                                    <Button onClick={closeModal} className="w-full">
+                                        Continue to Dashboard
+                                    </Button>
+                                </div>
+                            )}
+
+                            {paymentStep === 'failed' && (
+                                <div className="text-center py-12">
+                                    <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                                        <AlertCircle className="w-10 h-10 text-red-600" />
+                                    </div>
+                                    <h3 className="text-xl font-bold text-slate-900 mb-2">Payment Failed</h3>
+                                    <p className="text-slate-500 mb-6">Something went wrong. Please try again.</p>
+                                    <div className="space-y-3">
+                                        <Button onClick={() => setPaymentStep('select')} className="w-full">
+                                            Try Again
+                                        </Button>
+                                        <Button onClick={closeModal} variant="outline" className="w-full">
+                                            Cancel
+                                        </Button>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
