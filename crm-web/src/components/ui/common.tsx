@@ -11,20 +11,24 @@ export function cn(...inputs: ClassValue[]) {
 export const Button = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: string, size?: string }>(
     ({ className, variant = "default", size = "default", ...props }, ref) => {
         const variants: Record<string, string> = {
-            default: "bg-gradient-to-br from-[hsl(var(--primary))] to-[hsl(var(--primary))]/80 text-[hsl(var(--primary-foreground))] hover:shadow-xl hover:shadow-[hsl(var(--primary))]/30 shadow-md",
-            outline: "border border-slate-200 bg-white/60 backdrop-blur-sm hover:bg-white hover:border-[hsl(var(--primary))] hover:text-slate-900 shadow-sm",
-            ghost: "hover:bg-white/80 hover:backdrop-blur-sm text-slate-500 hover:text-slate-900",
+            default: "bg-[hsl(var(--primary))] text-white font-semibold shadow-lg shadow-[hsl(var(--primary))]/25 hover:shadow-xl hover:shadow-[hsl(var(--primary))]/40 hover:brightness-110 border-2 border-[hsl(var(--primary))]",
+            outline: "border-2 border-dashed border-[hsl(var(--primary))]/40 bg-white text-[hsl(var(--primary))] font-semibold hover:border-solid hover:border-[hsl(var(--primary))] hover:bg-[hsl(var(--primary))]/5",
+            ghost: "bg-transparent text-slate-600 font-medium hover:bg-slate-100 hover:text-slate-900",
+            secondary: "bg-slate-100 text-slate-700 font-semibold hover:bg-slate-200 border-2 border-slate-200",
+            destructive: "bg-red-500 text-white font-semibold shadow-lg shadow-red-500/25 hover:shadow-xl hover:shadow-red-500/40 hover:brightness-110 border-2 border-red-500",
+            success: "bg-emerald-500 text-white font-semibold shadow-lg shadow-emerald-500/25 hover:shadow-xl hover:shadow-emerald-500/40 hover:brightness-110 border-2 border-emerald-500",
         }
         const sizes: Record<string, string> = {
-            default: "h-11 px-6 rounded-2xl",
-            sm: "h-8 rounded-xl px-3",
-            icon: "h-9 w-9 rounded-xl",
+            default: "h-10 px-5 rounded-xl text-sm",
+            sm: "h-8 px-3 rounded-lg text-xs",
+            lg: "h-12 px-8 rounded-xl text-base",
+            icon: "h-9 w-9 rounded-lg",
         }
         return (
             <button
                 ref={ref}
                 className={cn(
-                    "inline-flex items-center justify-center text-sm font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--primary))]/50 disabled:pointer-events-none disabled:opacity-50",
+                    "inline-flex items-center justify-center gap-2 font-medium tracking-wide uppercase focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--primary))]/50 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 transition-all duration-200",
                     variants[variant] || variants.default,
                     sizes[size] || sizes.default,
                     className
