@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button, Input } from '@/components/ui/common';
 import { Check, Zap, Shield, X, Smartphone, CreditCard, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
 import { useAuth } from '@/components/AuthContext';
 import { supabase } from '@/lib/supabase';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 
 const plans = [
     {
@@ -52,10 +53,54 @@ type PaymentStep = 'select' | 'processing' | 'success' | 'failed';
 
 export default function Subscription() {
     const { user } = useAuth();
+    const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
     const [showPaymentModal, setShowPaymentModal] = useState(false);
     const [selectedPlan, setSelectedPlan] = useState<typeof plans[0] | null>(null);
     const [paymentStep, setPaymentStep] = useState<PaymentStep>('select');
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [paymentCompleted, setPaymentCompleted] = useState(false);
+
+    // Handle redirect back from PhonePe
+    useEffect(() => {
+        const status = searchParams.get('status');
+        const plan = searchParams.get('plan');
+
+        if (status === 'success' && plan) {
+            // Get stored transaction info
+            const pendingTxn = localStorage.getItem('pendingTransaction');
+            if (pendingTxn) {
+                const txnData = JSON.parse(pendingTxn);
+
+                // Update subscription in database
+                const updateSubscription = async () => {
+                    const { error } = await supabase.from('subscriptions').upsert({
+                        user_id: user?.id,
+                        plan: txnData.plan,
+                        status: 'active',
+                        started_at: new Date().toISOString(),
+                        expires_at: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+                        payment_method: 'phonepe',
+                        amount: txnData.amount,
+                        transaction_id: txnData.transactionId
+                    }, { onConflict: 'user_id' });
+
+                    if (error) console.error('Error updating subscription:', error);
+
+                    // Clear stored transaction
+                    localStorage.removeItem('pendingTransaction');
+                    setPaymentCompleted(true);
+                };
+
+                if (user?.id) {
+                    updateSubscription();
+                }
+            }
+
+            // Clear URL params
+            navigate('/subscription', { replace: true });
+        }
+    }, [searchParams, user, navigate]);
 
     const handleUpgrade = (plan: typeof plans[0]) => {
         if (plan.id === 'basic') return;
@@ -63,6 +108,7 @@ export default function Subscription() {
         setShowPaymentModal(true);
         setPaymentStep('select');
     };
+
 
     const handlePhonePePayment = async () => {
         if (!phoneNumber || phoneNumber.length < 10) {
@@ -72,36 +118,44 @@ export default function Subscription() {
 
         setPaymentStep('processing');
 
-        // Simulate PhonePe payment processing
-        // In production, this would call your backend API which then calls PhonePe
-        setTimeout(async () => {
-            try {
-                // Simulate 90% success rate for demo
-                const isSuccess = Math.random() > 0.1;
+        try {
+            // Call the PhonePe Edge Function to initiate payment
+            const response = await fetch('https://pnnzmvdcafaqjtkbavdc.supabase.co/functions/v1/phonepe-payment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    action: 'initiate',
+                    amount: selectedPlan?.price,
+                    userId: user?.id,
+                    phone: phoneNumber,
+                    redirectUrl: `${window.location.origin}/subscription?status=success&plan=${selectedPlan?.id}`
+                })
+            });
 
-                if (isSuccess) {
-                    // Update subscription in database
-                    const { error } = await supabase.from('subscriptions').upsert({
-                        user_id: user?.id,
-                        plan: selectedPlan?.id,
-                        status: 'active',
-                        started_at: new Date().toISOString(),
-                        expires_at: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
-                        payment_method: 'phonepe',
-                        amount: selectedPlan?.price
-                    }, { onConflict: 'user_id' });
+            const result = await response.json();
 
-                    if (error) console.error('Error updating subscription:', error);
-                    setPaymentStep('success');
-                } else {
-                    setPaymentStep('failed');
-                }
-            } catch (error) {
-                console.error('Payment error:', error);
+            if (result.success && result.redirectUrl) {
+                // Store transaction ID for later verification
+                localStorage.setItem('pendingTransaction', JSON.stringify({
+                    transactionId: result.transactionId,
+                    plan: selectedPlan?.id,
+                    amount: selectedPlan?.price
+                }));
+
+                // Redirect to PhonePe payment page
+                window.location.href = result.redirectUrl;
+            } else {
+                console.error('Payment initiation failed:', result.error);
                 setPaymentStep('failed');
             }
-        }, 3000);
+        } catch (error) {
+            console.error('Payment error:', error);
+            setPaymentStep('failed');
+        }
     };
+
 
     const closeModal = () => {
         setShowPaymentModal(false);
@@ -188,6 +242,7 @@ export default function Subscription() {
                             <button
                                 onClick={closeModal}
                                 className="absolute top-4 right-4 text-white/80 hover:text-white"
+                                aria-label="Close payment modal"
                             >
                                 <X className="w-6 h-6" />
                             </button>
