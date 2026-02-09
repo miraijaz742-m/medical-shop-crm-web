@@ -1,7 +1,7 @@
 import * as React from "react"
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
-import { X } from "lucide-react"
+import { X, ChevronDown } from "lucide-react"
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs))
@@ -134,15 +134,32 @@ export const DialogContent = ({ children, className }: any) => {
 export const DialogHeader = ({ children }: any) => <div className="mb-4">{children}</div>
 export const DialogTitle = ({ children }: any) => <h2 className="text-xl font-bold">{children}</h2>
 
-// Select (Very simplified)
-export const Select = ({ children, value, onValueChange }: any) => {
+// Select (Simplified but flexible)
+export const Select = ({ children, value, onValueChange, className, title }: any) => {
     return (
-        <select value={value} onChange={(e) => onValueChange(e.target.value)} className="h-10 border rounded px-2">
-            {children}
-        </select>
+        <div className={cn("relative w-full group", className)}>
+            <select
+                value={value}
+                onChange={(e) => onValueChange(e.target.value)}
+                title={title}
+                className={cn(
+                    "w-full h-11 rounded-2xl border border-slate-200 bg-white/60 backdrop-blur-sm px-4 pr-10 text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[hsl(var(--primary))]/30 transition-all duration-300 cursor-pointer",
+                    className
+                )}
+            >
+                {children}
+            </select>
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 group-hover:text-slate-600 transition-colors">
+                <ChevronDown className="h-4 w-4" />
+            </div>
+        </div>
     )
 }
 export const SelectTrigger = ({ children }: any) => children;
 export const SelectValue = ({ placeholder }: any) => <option value="" disabled>{placeholder}</option>;
 export const SelectContent = ({ children }: any) => children;
-export const SelectItem = ({ children, value }: any) => <option value={value}>{children}</option>;
+export const SelectItem = ({ children, value, className }: any) => (
+    <option value={value} className={className}>
+        {children}
+    </option>
+);

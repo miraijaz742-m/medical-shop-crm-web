@@ -453,15 +453,16 @@ export default memo(function Billing() {
           <CardContent className="space-y-6 pt-6">
             <div className="space-y-2">
               <Label className="text-[10px] font-black uppercase tracking-widest text-white/40">Payment Method</Label>
-              <Select value={paymentMethod} onValueChange={setPaymentMethod}>
-                <SelectTrigger className="h-11 bg-white/5 border-white/10 text-white font-bold rounded-xl focus:ring-0">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent className="bg-slate-900 border-white/10 text-white rounded-xl">
-                  <SelectItem value="cash" className="hover:bg-white/5">Cash Payment</SelectItem>
-                  <SelectItem value="card" className="hover:bg-white/5">Card / Debit</SelectItem>
-                  <SelectItem value="upi" className="hover:bg-white/5">UPI / QR Code</SelectItem>
-                </SelectContent>
+              <Select
+                value={paymentMethod}
+                onValueChange={setPaymentMethod}
+                className="bg-white/5 border-white/10 text-white rounded-xl focus:ring-[hsl(var(--primary))]/40"
+                title="Select payment method"
+              >
+                <SelectValue placeholder="Select method" />
+                <SelectItem value="cash" className="bg-slate-900 text-white">Cash Payment</SelectItem>
+                <SelectItem value="card" className="bg-slate-900 text-white">Card / Debit</SelectItem>
+                <SelectItem value="upi" className="bg-slate-900 text-white">UPI / QR Code</SelectItem>
               </Select>
             </div>
 
