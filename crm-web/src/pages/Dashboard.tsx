@@ -41,6 +41,10 @@ export default memo(function Dashboard() {
 
   useEffect(() => {
     const loadDashboardData = async () => {
+      if (!user?.id) {
+        setLoading(false);
+        return;
+      }
       try {
         setLoading(true);
 
@@ -143,7 +147,7 @@ export default memo(function Dashboard() {
     };
 
     loadDashboardData();
-  }, []);
+  }, [user]);
 
   const COLORS = ['#8177ea', '#2d3748', '#4a5568', '#718096', '#a0aec0'];
 
