@@ -102,11 +102,11 @@ export default function Login() {
 
     return (
         <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
-            <div className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <div className="hidden md:block">
-                    <Illustration type="medical" className="scale-110" />
-                    <div className="mt-8 text-center">
-                        <h3 className="text-xl font-black text-slate-800 uppercase tracking-wider">Pharmacy Management</h3>
+            <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div className="hidden md:flex flex-col items-center justify-center">
+                    <Illustration type="nurse" />
+                    <div className="mt-6 text-center">
+                        <h3 className="text-xl font-black text-slate-800 uppercase tracking-wider">Healthcare Management</h3>
                         <p className="text-sm text-slate-500 font-bold mt-2">Professional CRM for modern medical shops</p>
                     </div>
                 </div>

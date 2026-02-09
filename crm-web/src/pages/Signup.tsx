@@ -93,12 +93,12 @@ export default function Signup() {
 
     return (
         <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
-            <div className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <div className="hidden md:block">
-                    <Illustration type="secure" className="scale-110" />
-                    <div className="mt-8 text-center">
-                        <h3 className="text-xl font-black text-slate-800 uppercase tracking-wider">Secure Access</h3>
-                        <p className="text-sm text-slate-500 font-bold mt-2">Enterprise-grade security for your data</p>
+            <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div className="hidden md:flex flex-col items-center justify-center">
+                    <Illustration type="pharmacy-team" />
+                    <div className="mt-6 text-center">
+                        <h3 className="text-xl font-black text-slate-800 uppercase tracking-wider">Join Our Team</h3>
+                        <p className="text-sm text-slate-500 font-bold mt-2">Enterprise-grade security for your pharmacy</p>
                     </div>
                 </div>
                 <div className="w-full space-y-8">

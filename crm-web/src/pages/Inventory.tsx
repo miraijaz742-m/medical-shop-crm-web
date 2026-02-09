@@ -19,7 +19,8 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
+  Illustration
 } from '@/components/ui/common';
 import { Plus, Search, Edit, Trash2, RotateCcw, ChevronLeft, ChevronRight, Check, X, Package, AlertTriangle, Clock, MapPin, Calendar } from 'lucide-react';
 import { supabase } from '@/lib/supabase';

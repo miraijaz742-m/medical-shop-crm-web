@@ -163,9 +163,171 @@ export const SelectItem = ({ children, value, className }: any) => (
         {children}
     </option>
 );
-// Premium Static Illustration Component
-export const Illustration = ({ type, className }: { type: 'medical' | 'secure' | 'empty' | 'chart', className?: string }) => {
+// Modern Graphic Healthcare Illustrations
+export const Illustration = ({ type, className }: { type: 'medical' | 'secure' | 'empty' | 'chart' | 'nurse' | 'pharmacy-team' | 'inventory' | 'billing', className?: string }) => {
     const renders = {
+        nurse: (
+            <div className={cn("relative w-full aspect-square max-w-[320px] mx-auto", className)}>
+                <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    {/* Background circles */}
+                    <circle cx="200" cy="200" r="180" fill="#F0F4FF" opacity="0.5" />
+                    <circle cx="200" cy="200" r="140" fill="#E0E7FF" opacity="0.6" />
+
+                    {/* Nurse character */}
+                    <ellipse cx="200" cy="320" rx="60" ry="15" fill="#D1D5DB" opacity="0.3" />
+
+                    {/* Body */}
+                    <path d="M160 240 L160 310 L240 310 L240 240 Z" fill="#A78BFA" />
+                    <path d="M150 240 L150 260 L250 260 L250 240 Z" fill="#8B5CF6" />
+
+                    {/* Arms */}
+                    <rect x="130" y="250" width="20" height="50" rx="10" fill="#F3E8FF" />
+                    <rect x="250" y="250" width="20" height="50" rx="10" fill="#F3E8FF" />
+
+                    {/* Clipboard */}
+                    <rect x="240" y="260" width="35" height="45" rx="3" fill="#FFFFFF" stroke="#94A3B8" strokeWidth="2" />
+                    <line x1="248" y1="270" x2="267" y2="270" stroke="#CBD5E1" strokeWidth="2" />
+                    <line x1="248" y1="280" x2="267" y2="280" stroke="#CBD5E1" strokeWidth="2" />
+                    <line x1="248" y1="290" x2="260" y2="290" stroke="#CBD5E1" strokeWidth="2" />
+
+                    {/* Head */}
+                    <circle cx="200" cy="200" r="35" fill="#FDE68A" />
+
+                    {/* Hair */}
+                    <path d="M165 190 Q165 165 200 165 Q235 165 235 190 L235 200 L165 200 Z" fill="#7C3AED" />
+
+                    {/* Face details */}
+                    <circle cx="190" cy="200" r="3" fill="#374151" />
+                    <circle cx="210" cy="200" r="3" fill="#374151" />
+                    <path d="M190 210 Q200 215 210 210" stroke="#374151" strokeWidth="2" fill="none" />
+
+                    {/* Medical cross badge */}
+                    <circle cx="170" cy="250" r="12" fill="#FFFFFF" />
+                    <path d="M170 244 L170 256 M164 250 L176 250" stroke="#EF4444" strokeWidth="3" />
+
+                    {/* Stethoscope */}
+                    <path d="M180 270 Q180 285 195 290" stroke="#475569" strokeWidth="3" fill="none" />
+                    <circle cx="195" cy="290" r="5" fill="#475569" />
+                </svg>
+            </div>
+        ),
+        'pharmacy-team': (
+            <div className={cn("relative w-full aspect-square max-w-[320px] mx-auto", className)}>
+                <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    {/* Background */}
+                    <rect x="0" y="0" width="400" height="400" fill="#F8FAFC" />
+                    <circle cx="200" cy="200" r="160" fill="#E0E7FF" opacity="0.4" />
+
+                    {/* Pharmacy shelves */}
+                    <rect x="50" y="100" width="300" height="15" fill="#94A3B8" opacity="0.3" />
+                    <rect x="50" y="150" width="300" height="15" fill="#94A3B8" opacity="0.3" />
+
+                    {/* Medicine boxes */}
+                    <rect x="60" y="110" width="25" height="35" fill="#10B981" opacity="0.7" />
+                    <rect x="90" y="110" width="25" height="35" fill="#3B82F6" opacity="0.7" />
+                    <rect x="120" y="110" width="25" height="35" fill="#F59E0B" opacity="0.7" />
+
+                    {/* Person 1 - Pharmacist */}
+                    <ellipse cx="140" cy="340" rx="40" ry="10" fill="#D1D5DB" opacity="0.3" />
+                    <rect x="120" y="260" width="40" height="80" rx="5" fill="#FFFFFF" />
+                    <rect x="115" y="260" width="50" height="20" rx="3" fill="#8B5CF6" />
+                    <circle cx="140" cy="235" r="20" fill="#FCD34D" />
+                    <path d="M125 225 Q125 215 140 215 Q155 215 155 225 L155 235 L125 235 Z" fill="#6366F1" />
+                    <circle cx="135" cy="235" r="2" fill="#374151" />
+                    <circle cx="145" cy="235" r="2" fill="#374151" />
+
+                    {/* Person 2 - Assistant */}
+                    <ellipse cx="260" cy="340" rx="40" ry="10" fill="#D1D5DB" opacity="0.3" />
+                    <rect x="240" y="260" width="40" height="80" rx="5" fill="#A78BFA" />
+                    <circle cx="260" cy="235" r="20" fill="#F3E8FF" />
+                    <path d="M245 225 Q245 215 260 215 Q275 215 275 225 L275 235 L245 235 Z" fill="#4C1D95" />
+                    <circle cx="255" cy="235" r="2" fill="#374151" />
+                    <circle cx="265" cy="235" r="2" fill="#374151" />
+
+                    {/* Tablet/device */}
+                    <rect x="230" y="270" width="30" height="40" rx="3" fill="#1F2937" opacity="0.8" />
+                    <rect x="235" y="275" width="20" height="25" fill="#60A5FA" opacity="0.5" />
+
+                    {/* Medical cross */}
+                    <circle cx="320" cy="120" r="25" fill="#FFFFFF" opacity="0.9" />
+                    <path d="M320 105 L320 135 M305 120 L335 120" stroke="#EF4444" strokeWidth="5" />
+                </svg>
+            </div>
+        ),
+        inventory: (
+            <div className={cn("relative w-full aspect-square max-w-[280px] mx-auto", className)}>
+                <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="150" cy="150" r="130" fill="#F0F9FF" opacity="0.6" />
+
+                    {/* Shelving unit */}
+                    <rect x="80" y="80" width="140" height="10" fill="#64748B" />
+                    <rect x="80" y="140" width="140" height="10" fill="#64748B" />
+                    <rect x="80" y="200" width="140" height="10" fill="#64748B" />
+
+                    {/* Medicine boxes */}
+                    <rect x="90" y="90" width="30" height="45" fill="#10B981" opacity="0.8" />
+                    <rect x="125" y="90" width="30" height="45" fill="#3B82F6" opacity="0.8" />
+                    <rect x="160" y="90" width="30" height="45" fill="#F59E0B" opacity="0.8" />
+                    <rect x="195" y="90" width="20" height="45" fill="#EF4444" opacity="0.8" />
+
+                    <rect x="90" y="150" width="25" height="45" fill="#8B5CF6" opacity="0.8" />
+                    <rect x="120" y="150" width="35" height="45" fill="#EC4899" opacity="0.8" />
+                    <rect x="160" y="150" width="30" height="45" fill="#14B8A6" opacity="0.8" />
+
+                    {/* Barcode scanner */}
+                    <rect x="200" y="220" width="50" height="30" rx="5" fill="#1F2937" />
+                    <rect x="205" y="225" width="40" height="15" fill="#60A5FA" opacity="0.6" />
+                    <line x1="210" y1="230" x2="210" y2="235" stroke="#FFFFFF" strokeWidth="1" />
+                    <line x1="215" y1="230" x2="215" y2="235" stroke="#FFFFFF" strokeWidth="2" />
+                    <line x1="220" y1="230" x2="220" y2="235" stroke="#FFFFFF" strokeWidth="1" />
+                    <line x1="225" y1="230" x2="225" y2="235" stroke="#FFFFFF" strokeWidth="2" />
+                    <line x1="230" y1="230" x2="230" y2="235" stroke="#FFFFFF" strokeWidth="1" />
+
+                    {/* Checkmark */}
+                    <circle cx="60" cy="100" r="20" fill="#10B981" />
+                    <path d="M52 100 L58 106 L70 94" stroke="#FFFFFF" strokeWidth="3" fill="none" />
+                </svg>
+            </div>
+        ),
+        billing: (
+            <div className={cn("relative w-full aspect-square max-w-[280px] mx-auto", className)}>
+                <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="150" cy="150" r="130" fill="#FEF3C7" opacity="0.4" />
+
+                    {/* Receipt/Invoice */}
+                    <rect x="90" y="60" width="120" height="180" rx="8" fill="#FFFFFF" stroke="#CBD5E1" strokeWidth="3" />
+
+                    {/* Receipt header */}
+                    <rect x="100" y="75" width="100" height="8" rx="4" fill="#8B5CF6" opacity="0.3" />
+                    <rect x="100" y="90" width="80" height="6" rx="3" fill="#CBD5E1" opacity="0.5" />
+
+                    {/* Receipt lines */}
+                    <line x1="100" y1="110" x2="190" y2="110" stroke="#E5E7EB" strokeWidth="2" />
+                    <line x1="100" y1="125" x2="190" y2="125" stroke="#E5E7EB" strokeWidth="2" />
+                    <line x1="100" y1="140" x2="190" y2="140" stroke="#E5E7EB" strokeWidth="2" />
+                    <line x1="100" y1="155" x2="190" y2="155" stroke="#E5E7EB" strokeWidth="2" />
+
+                    {/* Total section */}
+                    <rect x="100" y="170" width="100" height="25" fill="#10B981" opacity="0.1" />
+                    <rect x="105" y="175" width="50" height="8" rx="4" fill="#10B981" opacity="0.6" />
+                    <rect x="160" y="175" width="25" height="8" rx="4" fill="#10B981" />
+
+                    {/* Coins */}
+                    <circle cx="240" cy="200" r="18" fill="#F59E0B" opacity="0.8" />
+                    <circle cx="255" cy="215" r="15" fill="#FBBF24" opacity="0.8" />
+                    <circle cx="230" cy="220" r="12" fill="#FCD34D" opacity="0.8" />
+
+                    {/* Dollar signs */}
+                    <text x="235" y="207" fill="#FFFFFF" fontSize="16" fontWeight="bold">₹</text>
+
+                    {/* Credit card */}
+                    <rect x="40" y="200" width="60" height="40" rx="5" fill="#6366F1" />
+                    <rect x="45" y="210" width="50" height="8" rx="2" fill="#FFFFFF" opacity="0.3" />
+                    <circle cx="55" cy="228" r="6" fill="#FFFFFF" opacity="0.5" />
+                    <circle cx="70" cy="228" r="6" fill="#FFFFFF" opacity="0.5" />
+                </svg>
+            </div>
+        ),
         medical: (
             <div className={cn("relative w-full aspect-square max-w-[280px] mx-auto", className)}>
                 <div className="absolute inset-0 bg-[hsl(var(--primary))]/5 rounded-3xl -rotate-6" />
