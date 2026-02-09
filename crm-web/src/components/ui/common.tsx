@@ -17,8 +17,8 @@ export const Button = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAttrib
         }
         const sizes: Record<string, string> = {
             default: "h-11 px-6 rounded-2xl",
-            sm: "h-9 rounded-xl px-4",
-            icon: "h-11 w-11 rounded-2xl",
+            sm: "h-8 rounded-xl px-3",
+            icon: "h-9 w-9 rounded-xl",
         }
         return (
             <button
@@ -42,7 +42,7 @@ export const Input = React.forwardRef<HTMLInputElement, React.InputHTMLAttribute
             <input
                 type={type}
                 className={cn(
-                    "flex h-11 w-full rounded-2xl border border-slate-200 bg-white/60 backdrop-blur-sm px-4 py-2 text-sm placeholder:text-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--primary))]/30 focus-visible:border-[hsl(var(--primary))] disabled:cursor-not-allowed disabled:opacity-50 shadow-sm focus:shadow-md",
+                    "flex h-9 w-full rounded-xl border border-slate-200 bg-white/60 backdrop-blur-sm px-3 py-1 text-sm placeholder:text-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--primary))]/30 focus-visible:border-[hsl(var(--primary))] disabled:cursor-not-allowed disabled:opacity-50 shadow-sm focus:shadow-md",
                     className
                 )}
                 ref={ref}
@@ -82,7 +82,7 @@ export const TableHead = ({ className, ...props }: React.ThHTMLAttributes<HTMLTa
     <th className={cn("h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0", className)} {...props} />
 )
 export const TableCell = ({ className, ...props }: React.TdHTMLAttributes<HTMLTableCellElement>) => (
-    <td className={cn("p-4 align-middle [&:has([role=checkbox])]:pr-0", className)} {...props} />
+    <td className={cn("p-2 align-middle [&:has([role=checkbox])]:pr-0", className)} {...props} />
 )
 
 // Dialog Context
@@ -143,7 +143,7 @@ export const Select = ({ children, value, onValueChange, className, title }: any
                 onChange={(e) => onValueChange(e.target.value)}
                 title={title}
                 className={cn(
-                    "w-full h-11 rounded-2xl border border-slate-200 bg-white/60 backdrop-blur-sm px-4 pr-10 text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[hsl(var(--primary))]/30 cursor-pointer",
+                    "w-full h-9 rounded-xl border border-slate-200 bg-white/60 backdrop-blur-sm px-3 pr-8 text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[hsl(var(--primary))]/30 cursor-pointer",
                     className
                 )}
             >
@@ -167,7 +167,7 @@ export const SelectItem = ({ children, value, className }: any) => (
 export const Illustration = ({ type, className }: { type: 'medical' | 'secure' | 'empty' | 'chart' | 'nurse' | 'pharmacy-team' | 'inventory' | 'billing', className?: string }) => {
     const renders = {
         nurse: (
-            <div className={cn("relative w-full aspect-square max-w-[320px] mx-auto", className)}>
+            <div className={cn("relative w-full aspect-square max-w-[240px] mx-auto", className)}>
                 <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
                     {/* Background circles */}
                     <circle cx="200" cy="200" r="180" fill="#F0F4FF" opacity="0.5" />
@@ -212,7 +212,7 @@ export const Illustration = ({ type, className }: { type: 'medical' | 'secure' |
             </div>
         ),
         'pharmacy-team': (
-            <div className={cn("relative w-full aspect-square max-w-[320px] mx-auto", className)}>
+            <div className={cn("relative w-full aspect-square max-w-[240px] mx-auto", className)}>
                 <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
                     {/* Background */}
                     <rect x="0" y="0" width="400" height="400" fill="#F8FAFC" />
@@ -255,7 +255,7 @@ export const Illustration = ({ type, className }: { type: 'medical' | 'secure' |
             </div>
         ),
         inventory: (
-            <div className={cn("relative w-full aspect-square max-w-[280px] mx-auto", className)}>
+            <div className={cn("relative w-full aspect-square max-w-[200px] mx-auto", className)}>
                 <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="150" cy="150" r="130" fill="#F0F9FF" opacity="0.6" />
 
@@ -290,7 +290,7 @@ export const Illustration = ({ type, className }: { type: 'medical' | 'secure' |
             </div>
         ),
         billing: (
-            <div className={cn("relative w-full aspect-square max-w-[280px] mx-auto", className)}>
+            <div className={cn("relative w-full aspect-square max-w-[200px] mx-auto", className)}>
                 <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="150" cy="150" r="130" fill="#FEF3C7" opacity="0.4" />
 

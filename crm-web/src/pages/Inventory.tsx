@@ -586,7 +586,7 @@ export default memo(function Inventory() {
                     <Input type="number" value={formData.low_stock_threshold} onChange={e => setFormData({ ...formData, low_stock_threshold: Number(e.target.value) })} placeholder="Default 10" />
                   </div>
                 </div>
-                <Button onClick={handleSubmit} className="w-full h-11 bg-[hsl(var(--primary))] hover:bg-sky-700 text-white font-semibold">Save Stock</Button>
+                <Button onClick={handleSubmit} className="w-full bg-[hsl(var(--primary))] hover:bg-sky-700 text-white font-semibold">Save Stock</Button>
               </DialogContent>
             </Dialog>
 

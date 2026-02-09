@@ -250,7 +250,7 @@ export default memo(function Billing() {
                   placeholder="Search products..."
                   value={searchTerm}
                   onChange={(e) => handleProductSearch(e.target.value)}
-                  className="pl-10 h-12 bg-slate-50 border-slate-100 focus:bg-white shadow-none rounded-xl"
+                  className="pl-10 bg-slate-50 border-slate-100 focus:bg-white shadow-none rounded-xl"
                 />
 
                 {searchResults.length > 0 && (
@@ -284,14 +284,14 @@ export default memo(function Billing() {
                     type="number"
                     min={1}
                     value={quantity}
-                    className="h-12 bg-slate-50 border-slate-100 text-center font-bold rounded-xl"
+                    className="bg-slate-50 border-slate-100 text-center font-bold rounded-xl"
                     onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
                   />
                 </div>
                 <Button
                   onClick={addToCart}
                   disabled={!selectedProduct}
-                  className="h-12 px-6 bg-[hsl(var(--primary))] text-white font-black uppercase tracking-widest rounded-xl hover:opacity-90 shadow-lg shadow-[hsl(var(--primary))]/20 flex-1 sm:flex-none"
+                  className="px-6 bg-[hsl(var(--primary))] text-white font-black uppercase tracking-widest rounded-xl hover:opacity-90 shadow-lg shadow-[hsl(var(--primary))]/20 flex-1 sm:flex-none"
                 >
                   <Plus className="h-5 w-5 mr-2" />
                   Add
@@ -377,7 +377,7 @@ export default memo(function Billing() {
                   placeholder="Enter customer name"
                   value={customerName}
                   onChange={(e) => handleCustomerSearch(e.target.value)}
-                  className="h-11 bg-slate-50 border-slate-100 rounded-xl"
+                  className="bg-slate-50 border-slate-100 rounded-xl"
                 />
                 {customerSearchResults.length > 0 && (
                   <div className="absolute top-full left-0 right-0 z-50 bg-white border border-slate-100 rounded-xl shadow-xl max-h-40 overflow-y-auto mt-2 overflow-hidden">
@@ -402,13 +402,13 @@ export default memo(function Billing() {
                 placeholder="Enter phone number"
                 value={customerPhone}
                 onChange={(e) => setCustomerPhone(e.target.value)}
-                className="h-11 bg-slate-50 border-slate-100 rounded-xl"
+                className="bg-slate-50 border-slate-100 rounded-xl"
               />
             </div>
 
             <Dialog open={showAddCustomer} onOpenChange={setShowAddCustomer}>
               <DialogTrigger asChild>
-                <Button variant="outline" className="w-full h-11 border-slate-100 font-bold text-slate-600 rounded-xl hover:bg-slate-50">
+                <Button variant="outline" className="w-full border-slate-100 font-bold text-slate-600 rounded-xl hover:bg-slate-50">
                   <UserPlus className="h-4 w-4 mr-2" />
                   Add New Customer
                 </Button>
@@ -424,7 +424,7 @@ export default memo(function Billing() {
                       value={newCustomerName}
                       onChange={(e) => setNewCustomerName(e.target.value)}
                       placeholder="Full Name"
-                      className="h-12 bg-slate-50 border-slate-100 rounded-xl"
+                      className="bg-slate-50 border-slate-100 rounded-xl"
                     />
                   </div>
                   <div className="space-y-2">
@@ -433,10 +433,10 @@ export default memo(function Billing() {
                       value={newCustomerPhone}
                       onChange={(e) => setNewCustomerPhone(e.target.value)}
                       placeholder="Mobile Number"
-                      className="h-12 bg-slate-50 border-slate-100 rounded-xl"
+                      className="bg-slate-50 border-slate-100 rounded-xl"
                     />
                   </div>
-                  <Button onClick={addNewCustomer} className="w-full h-12 bg-[hsl(var(--primary))] text-white font-black uppercase tracking-widest rounded-xl hover:opacity-90 mt-4 shadow-lg shadow-[hsl(var(--primary))]/20">
+                  <Button onClick={addNewCustomer} className="w-full bg-[hsl(var(--primary))] text-white font-black uppercase tracking-widest rounded-xl hover:opacity-90 mt-4 shadow-lg shadow-[hsl(var(--primary))]/20">
                     Create Profile
                   </Button>
                 </div>
@@ -484,7 +484,7 @@ export default memo(function Billing() {
             <div className="grid grid-cols-1 gap-3">
               <Button
                 onClick={generateBill}
-                className="w-full h-14 bg-[hsl(var(--primary))] text-white font-black uppercase tracking-widest rounded-2xl hover:opacity-90 shadow-xl shadow-[hsl(var(--primary))]/20"
+                className="w-full bg-[hsl(var(--primary))] text-white font-black uppercase tracking-widest rounded-2xl hover:opacity-90 shadow-xl shadow-[hsl(var(--primary))]/20"
                 disabled={cart.length === 0 || !customerName.trim()}
               >
                 <Printer className="h-5 w-5 mr-3" />
@@ -494,7 +494,7 @@ export default memo(function Billing() {
               <Button
                 onClick={handleDownloadPDF}
                 variant="outline"
-                className="w-full h-12 bg-white/5 border-white/10 text-white/80 font-black uppercase tracking-widest rounded-2xl hover:bg-white/10"
+                className="w-full bg-white/5 border-white/10 text-white/80 font-black uppercase tracking-widest rounded-2xl hover:bg-white/10"
                 disabled={cart.length === 0 || !customerName.trim()}
               >
                 <Download className="h-4 w-4 mr-2" />

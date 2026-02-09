@@ -102,23 +102,23 @@ export default function Login() {
 
     return (
         <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
-            <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
                 <div className="hidden md:flex flex-col items-center justify-center">
                     <Illustration type="nurse" />
-                    <div className="mt-6 text-center">
-                        <h3 className="text-xl font-black text-slate-800 uppercase tracking-wider">Healthcare Management</h3>
-                        <p className="text-sm text-slate-500 font-bold mt-2">Professional CRM for modern medical shops</p>
+                    <div className="mt-4 text-center">
+                        <h3 className="text-lg font-black text-slate-800 uppercase tracking-wider">Healthcare Management</h3>
+                        <p className="text-xs text-slate-500 font-bold mt-1">Professional CRM for modern medical shops</p>
                     </div>
                 </div>
-                <div className="w-full space-y-8">
+                <div className="w-full space-y-4">
                     <div className="text-center">
-                        <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] mb-4 shadow-lg shadow-[hsl(var(--primary))]/20">
-                            <Stethoscope className="w-8 h-8" />
+                        <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] mb-3 shadow-lg shadow-[hsl(var(--primary))]/20">
+                            <Stethoscope className="w-6 h-6" />
                         </div>
-                        <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+                        <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">
                             Medical Shop CRM
                         </h2>
-                        <p className="mt-2 text-sm text-slate-500 font-medium">
+                        <p className="mt-1 text-sm text-slate-500 font-medium">
                             Sign in to manage your inventory and sales
                         </p>
                     </div>

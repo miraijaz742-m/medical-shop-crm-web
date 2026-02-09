@@ -167,13 +167,13 @@ export default memo(function Dashboard() {
   return (
     <div className="space-y-4 p-4">
       {/* Illustration Header */}
-      <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-3xl p-6 border border-slate-100">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+      <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-2xl p-4 border border-slate-100">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex-1 text-center md:text-left">
-            <h1 className="text-3xl font-black text-slate-800 mb-2">Welcome to Your Dashboard</h1>
-            <p className="text-slate-600 font-medium">Manage your pharmacy operations efficiently</p>
+            <h1 className="text-2xl font-black text-slate-800 mb-1">Welcome to Your Dashboard</h1>
+            <p className="text-slate-600 font-medium text-sm">Manage your pharmacy operations efficiently</p>
           </div>
-          <div className="w-48 md:w-56">
+          <div className="w-32 md:w-40">
             <Illustration type="pharmacy-team" className="scale-90" />
           </div>
         </div>

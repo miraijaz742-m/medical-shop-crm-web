@@ -189,13 +189,13 @@ export default memo(function Customers() {
             placeholder="Search customers..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10 h-11"
+            className="pl-10"
           />
         </div>
         <div className="flex gap-2 w-full sm:w-auto">
           <Dialog open={showAddDialog} onOpenChange={setShowAddDialog}>
             <DialogTrigger asChild>
-              <Button onClick={resetForm} className="bg-[hsl(var(--primary))] text-white h-11 w-full sm:w-auto">
+              <Button onClick={resetForm} className="bg-[hsl(var(--primary))] text-white w-full sm:w-auto">
                 <Plus className="h-4 w-4 mr-2" />
                 Add Customer
               </Button>
