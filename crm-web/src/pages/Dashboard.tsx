@@ -169,12 +169,12 @@ export default memo(function Dashboard() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 sm:gap-6">
         {statCards.map((stat, index) => (
           <Card key={index} className="border-none shadow-xl shadow-slate-200/40 relative overflow-hidden group">
-            <div className={`absolute top-0 right-0 w-24 h-24 ${stat.color}/5 rounded-full -mr-8 -mt-8 transition-transform group-hover:scale-150 duration-500`} />
+            <div className={`absolute top-0 right-0 w-24 h-24 ${stat.color}/5 rounded-full -mr-8 -mt-8`} />
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
                 {stat.title}
               </CardTitle>
-              <div className={`${stat.color} w-10 h-10 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-${stat.color.split('-')[1]}-500/20 transition-all group-hover:rotate-12`}>
+              <div className={`${stat.color} w-10 h-10 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-${stat.color.split('-')[1]}-500/20`}>
                 <stat.icon className="h-5 w-5" />
               </div>
             </CardHeader>
@@ -206,9 +206,9 @@ export default memo(function Dashboard() {
             <div className="space-y-3 max-h-[340px] overflow-y-auto pr-2 custom-scrollbar">
               {lowStockItems.length > 0 ? (
                 lowStockItems.map(item => (
-                  <div key={item.id} className="flex items-center justify-between p-4 rounded-2xl bg-white border border-slate-100 hover:border-amber-200 hover:shadow-md hover:shadow-amber-500/5 transition-all group">
+                  <div key={item.id} className="flex items-center justify-between p-4 rounded-2xl bg-white border border-slate-100 group">
                     <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 font-bold group-hover:bg-amber-50 group-hover:text-amber-600 transition-colors">
+                      <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 font-bold group-hover:bg-amber-50 group-hover:text-amber-600">
                         {item.name[0]}
                       </div>
                       <div>
@@ -259,9 +259,9 @@ export default memo(function Dashboard() {
                   const statusColor = isExpired ? 'bg-rose-500/10 text-rose-600 border-rose-200' : daysLeft < 30 ? 'bg-amber-500/10 text-amber-600 border-amber-200' : 'bg-slate-100 text-slate-600 border-slate-200';
 
                   return (
-                    <div key={item.id} className="flex items-center justify-between p-4 rounded-2xl bg-white border border-slate-100 hover:border-rose-200 hover:shadow-md hover:shadow-rose-500/5 transition-all group">
+                    <div key={item.id} className="flex items-center justify-between p-4 rounded-2xl bg-white border border-slate-100 group">
                       <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 font-bold group-hover:bg-rose-50 group-hover:text-rose-600 transition-colors">
+                        <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 font-bold group-hover:bg-rose-50 group-hover:text-rose-600">
                           {item.name[0]}
                         </div>
                         <div>

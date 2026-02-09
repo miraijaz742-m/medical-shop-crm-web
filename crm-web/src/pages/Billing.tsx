@@ -250,7 +250,7 @@ export default memo(function Billing() {
                   placeholder="Search products..."
                   value={searchTerm}
                   onChange={(e) => handleProductSearch(e.target.value)}
-                  className="pl-10 h-12 bg-slate-50 border-slate-100 focus:bg-white transition-all shadow-none rounded-xl"
+                  className="pl-10 h-12 bg-slate-50 border-slate-100 focus:bg-white shadow-none rounded-xl"
                 />
 
                 {searchResults.length > 0 && (
@@ -258,7 +258,7 @@ export default memo(function Billing() {
                     {searchResults.map(med => (
                       <div
                         key={med.id}
-                        className="p-4 hover:bg-[hsl(var(--primary))]/5 cursor-pointer border-b border-slate-50 last:border-b-0 flex justify-between items-center group transition-colors"
+                        className="p-4 hover:bg-[hsl(var(--primary))]/5 cursor-pointer border-b border-slate-50 last:border-b-0 flex justify-between items-center group"
                         onClick={() => {
                           setSelectedProduct(med);
                           setSearchTerm(med.name);
@@ -291,7 +291,7 @@ export default memo(function Billing() {
                 <Button
                   onClick={addToCart}
                   disabled={!selectedProduct}
-                  className="h-12 px-6 bg-[hsl(var(--primary))] text-white font-black uppercase tracking-widest rounded-xl hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-[hsl(var(--primary))]/20 flex-1 sm:flex-none"
+                  className="h-12 px-6 bg-[hsl(var(--primary))] text-white font-black uppercase tracking-widest rounded-xl hover:opacity-90 shadow-lg shadow-[hsl(var(--primary))]/20 flex-1 sm:flex-none"
                 >
                   <Plus className="h-5 w-5 mr-2" />
                   Add
@@ -332,7 +332,7 @@ export default memo(function Billing() {
                     </TableRow>
                   ) : (
                     cart.map((item) => (
-                      <TableRow key={item.productId} className="border-slate-50 group hover:bg-slate-50/50 transition-colors">
+                      <TableRow key={item.productId} className="border-slate-50 group hover:bg-slate-50/50">
                         <TableCell className="pl-6">
                           <div className="font-bold text-slate-900">{item.productName}</div>
                           <div className="text-[10px] font-black text-[hsl(var(--primary))] tracking-widest uppercase mt-1 opacity-60">
@@ -346,7 +346,7 @@ export default memo(function Billing() {
                           <Button
                             variant="ghost"
                             size="sm"
-                            className="h-8 w-8 p-0 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg group-hover:opacity-100 opacity-0 transition-all"
+                            className="h-8 w-8 p-0 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg group-hover:opacity-100 opacity-0"
                             onClick={() => removeFromCart(item.productId)}
                           >
                             <Trash2 className="h-4 w-4" />
@@ -380,7 +380,7 @@ export default memo(function Billing() {
                   className="h-11 bg-slate-50 border-slate-100 rounded-xl"
                 />
                 {customerSearchResults.length > 0 && (
-                  <div className="absolute top-full left-0 right-0 z-50 bg-white border border-slate-100 rounded-xl shadow-xl max-h-40 overflow-y-auto mt-2 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
+                  <div className="absolute top-full left-0 right-0 z-50 bg-white border border-slate-100 rounded-xl shadow-xl max-h-40 overflow-y-auto mt-2 overflow-hidden">
                     {customerSearchResults.map(c => (
                       <div key={c.id} className="p-3 hover:bg-[hsl(var(--primary))]/5 cursor-pointer border-b border-slate-50 text-sm font-bold text-slate-700" onClick={() => {
                         setCustomerName(c.name);
@@ -408,7 +408,7 @@ export default memo(function Billing() {
 
             <Dialog open={showAddCustomer} onOpenChange={setShowAddCustomer}>
               <DialogTrigger asChild>
-                <Button variant="outline" className="w-full h-11 border-slate-100 font-bold text-slate-600 rounded-xl hover:bg-slate-50 active:scale-95 transition-all">
+                <Button variant="outline" className="w-full h-11 border-slate-100 font-bold text-slate-600 rounded-xl hover:bg-slate-50">
                   <UserPlus className="h-4 w-4 mr-2" />
                   Add New Customer
                 </Button>
@@ -484,7 +484,7 @@ export default memo(function Billing() {
             <div className="grid grid-cols-1 gap-3">
               <Button
                 onClick={generateBill}
-                className="w-full h-14 bg-[hsl(var(--primary))] text-white font-black uppercase tracking-widest rounded-2xl hover:opacity-90 active:scale-[0.98] transition-all shadow-xl shadow-[hsl(var(--primary))]/20"
+                className="w-full h-14 bg-[hsl(var(--primary))] text-white font-black uppercase tracking-widest rounded-2xl hover:opacity-90 shadow-xl shadow-[hsl(var(--primary))]/20"
                 disabled={cart.length === 0 || !customerName.trim()}
               >
                 <Printer className="h-5 w-5 mr-3" />
@@ -494,7 +494,7 @@ export default memo(function Billing() {
               <Button
                 onClick={handleDownloadPDF}
                 variant="outline"
-                className="w-full h-12 bg-white/5 border-white/10 text-white/80 font-black uppercase tracking-widest rounded-2xl hover:bg-white/10 transition-all"
+                className="w-full h-12 bg-white/5 border-white/10 text-white/80 font-black uppercase tracking-widest rounded-2xl hover:bg-white/10"
                 disabled={cart.length === 0 || !customerName.trim()}
               >
                 <Download className="h-4 w-4 mr-2" />

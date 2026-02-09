@@ -34,12 +34,15 @@
 
   color: #0f172a;
   background-color: #fafbfd;
-  background-image:
-    radial-gradient(circle at 0% 0%, rgba(179, 255, 77, 0.05) 0%, transparent 40%),
-    radial-gradient(circle at 100% 100%, rgba(179, 255, 77, 0.05) 0%, transparent 40%),
-    radial-gradient(#e2e8f0 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 32px 32px;
+  background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+  background-size: 24px 24px;
   background-attachment: fixed;
+}
+
+/* Disable all animations and transitions globally */
+* {
+  animation: none !important;
+  transition: none !important;
 }
 
 @layer base {
@@ -48,7 +51,7 @@
   }
 
   body {
-    background-color: hsl(var(--background));
+    background-color: transparent;
     color: hsl(var(--foreground));
     -webkit-font-smoothing: antialiased;
     -moz-osx-smoothing: grayscale;

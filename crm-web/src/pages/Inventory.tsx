@@ -394,7 +394,7 @@ export default memo(function Inventory() {
         <Card className="border-none shadow-sm bg-white overflow-hidden group hover:shadow-md transition-shadow">
           <CardContent className="p-0">
             <div className="flex items-center p-4 md:p-6">
-              <div className="p-3 rounded-xl bg-sky-50 text-[hsl(var(--primary))] group-hover:bg-[hsl(var(--primary))] group-hover:text-white transition-colors">
+              <div className="p-3 rounded-xl bg-sky-50 text-[hsl(var(--primary))] group-hover:bg-[hsl(var(--primary))] group-hover:text-white">
                 <Package className="h-6 w-6" />
               </div>
               <div className="ml-4">
@@ -411,7 +411,7 @@ export default memo(function Inventory() {
         <Card className="border-none shadow-sm bg-white overflow-hidden group hover:shadow-md transition-shadow">
           <CardContent className="p-0">
             <div className="flex items-center p-4 md:p-6">
-              <div className="p-3 rounded-xl bg-orange-50 text-orange-600 group-hover:bg-orange-600 group-hover:text-white transition-colors">
+              <div className="p-3 rounded-xl bg-orange-50 text-orange-600 group-hover:bg-orange-600 group-hover:text-white">
                 <AlertTriangle className="h-6 w-6" />
               </div>
               <div className="ml-4">
@@ -425,10 +425,10 @@ export default memo(function Inventory() {
           </CardContent>
         </Card>
 
-        <Card className="border-none shadow-sm bg-white overflow-hidden group hover:shadow-md transition-shadow sm:col-span-2 md:col-span-1">
+        <Card className="border-none shadow-sm bg-white overflow-hidden group">
           <CardContent className="p-0">
             <div className="flex items-center p-4 md:p-6">
-              <div className="p-3 rounded-xl bg-purple-50 text-purple-600 group-hover:bg-purple-600 group-hover:text-white transition-colors">
+              <div className="p-3 rounded-xl bg-purple-50 text-purple-600 group-hover:bg-purple-600 group-hover:text-white">
                 <Clock className="h-6 w-6" />
               </div>
               <div className="ml-4">
@@ -449,7 +449,7 @@ export default memo(function Inventory() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
             <Input
               placeholder="Search medicines..."
-              className="pl-10 h-11 bg-gray-50 border-gray-200 focus:bg-white transition-all shadow-none"
+              className="pl-10 h-11 bg-gray-50 border-gray-200 focus:bg-white shadow-none"
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
             />
@@ -537,7 +537,7 @@ export default memo(function Inventory() {
                         {suggestions.map((med, idx) => (
                           <div
                             key={idx}
-                            className="px-4 py-2.5 hover:bg-sky-50 cursor-pointer border-b border-gray-50 last:border-none transition-colors group"
+                            className="px-4 py-2.5 hover:bg-sky-50 cursor-pointer border-b border-gray-50 last:border-none group"
                             onClick={() => handleSelectSuggestion(med)}
                           >
                             <div className="flex flex-col">
@@ -646,12 +646,12 @@ export default memo(function Inventory() {
                   {medicines.map(med => (
                     <React.Fragment key={med.id}>
                       <TableRow
-                        className="group cursor-pointer hover:bg-sky-50/30 transition-colors border-gray-50"
+                        className="group cursor-pointer hover:bg-sky-50/30 border-gray-50"
                         onClick={() => toggleExpand(med.id)}
                       >
                         <TableCell className="py-4">
                           <div className="flex flex-col">
-                            <span className="font-bold text-gray-900 group-hover:text-[hsl(var(--primary))] transition-colors">{med.name}</span>
+                            <span className="font-bold text-gray-900 group-hover:text-[hsl(var(--primary))]">{med.name}</span>
                             <div className="flex items-center gap-2 mt-1">
                               <span className="text-[10px] uppercase tracking-wider font-bold px-1.5 py-0.5 rounded bg-gray-100 text-gray-500">
                                 {med.category || 'General'}
@@ -689,7 +689,7 @@ export default memo(function Inventory() {
                             </div>
                           ) : (
                             <div
-                              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-sky-50 text-sky-700 text-xs font-bold border border-sky-100 hover:bg-sky-100 transition-colors active:scale-95"
+                              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-sky-50 text-sky-700 text-xs font-bold border border-sky-100 hover:bg-sky-100"
                               onClick={(e) => {
                                 e.stopPropagation();
                                 setEditingShelfId(med.id);
@@ -739,7 +739,7 @@ export default memo(function Inventory() {
                             </div>
                             <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
                               <div
-                                className={`h-full rounded-full transition-all duration-500 ${med.total_stock < (med.low_stock_threshold || 10) ? 'bg-red-500' : 'bg-sky-500'}`}
+                                className={`h-full rounded-full ${med.total_stock < (med.low_stock_threshold || 10) ? 'bg-red-500' : 'bg-sky-500'}`}
                                 style={{ width: `${Math.min(100, (med.total_stock / ((med.low_stock_threshold || 10) * 2)) * 100)}%` }}
                               />
                             </div>
@@ -758,7 +758,7 @@ export default memo(function Inventory() {
                         </TableCell>
 
                         <TableCell className="py-4 text-right">
-                          <div className="flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <div className="flex justify-end gap-1 opacity-0 group-hover:opacity-100">
                             <Button
                               variant="ghost"
                               size="icon"
